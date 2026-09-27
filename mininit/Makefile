@@ -1,4 +1,4 @@
-TARGET  = mininit
+TARGET  = mininit-syspart
 CROSS   = arm-linux-gnueabihf-
 CC      = $(CROSS)gcc
 LD      = $(CROSS)gcc
