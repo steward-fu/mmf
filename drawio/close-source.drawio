@@ -1,0 +1,40 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="1kwmxRV6Y2_ILTTqYzCj" name="Page-1">
+    <mxGraphModel dx="1400" dy="750" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="peiQm32xFvpG7bbC_YYz-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#a20025;fontColor=#ffffff;strokeColor=#FFFFFF;" value="Loader" vertex="1">
+          <mxGeometry height="60" width="260" x="190" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="peiQm32xFvpG7bbC_YYz-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#a20025;fontColor=#ffffff;strokeColor=#FFFFFF;" value="U-Boot" vertex="1">
+          <mxGeometry height="60" width="260" x="190" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="peiQm32xFvpG7bbC_YYz-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#fff2cc;strokeColor=#d6b656;" value="" vertex="1">
+          <mxGeometry height="220" width="260" x="190" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="peiQm32xFvpG7bbC_YYz-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=16;fontStyle=1" value="Kernel" vertex="1">
+          <mxGeometry height="30" width="60" x="200" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="peiQm32xFvpG7bbC_YYz-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" value="Framebuffer" vertex="1">
+          <mxGeometry height="50" width="120" x="305" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="peiQm32xFvpG7bbC_YYz-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" value="Audio" vertex="1">
+          <mxGeometry height="50" width="120" x="305" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="peiQm32xFvpG7bbC_YYz-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" value="IPU" vertex="1">
+          <mxGeometry height="50" width="120" x="305" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="peiQm32xFvpG7bbC_YYz-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#a20025;fontColor=#ffffff;strokeColor=#FFFFFF;" value="rootfs" vertex="1">
+          <mxGeometry height="100" width="260" x="190" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="peiQm32xFvpG7bbC_YYz-10" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=16;fontStyle=0" value="P.S. 紅色是沒有開源的部份" vertex="1">
+          <mxGeometry height="30" width="260" x="190" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="peiQm32xFvpG7bbC_YYz-11" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=16;fontStyle=0;fontColor=#0000FF;" value="只有 Kernel Module 檔案 (*.ko)" vertex="1">
+          <mxGeometry height="30" width="260" x="470" y="345" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

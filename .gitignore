@@ -1,1 +1,5 @@
 kernel/run.sh
+kernel/arch/arm/boot/Image.mz
+kernel/arch/arm/boot/Image.xz
+kernel/arch/arm/boot/uImage.mz
+kernel/arch/arm/boot/uImage.xz
