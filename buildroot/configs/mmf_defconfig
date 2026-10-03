@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot 2026.08 Configuration
+# Buildroot -g0a9556f7c-dirty Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_HOST_GCC_AT_LEAST_4_9=y
@@ -1061,6 +1061,7 @@ BR2_PACKAGE_NETSURF_ARCH_SUPPORTS=y
 # ogre needs X11 and an OpenGL provider
 #
 # BR2_PACKAGE_PSPLASH is not set
+BR2_PACKAGE_MMF=y
 BR2_PACKAGE_SDL=y
 BR2_PACKAGE_SDL_FBCON=y
 BR2_PACKAGE_SDL_GFX=y

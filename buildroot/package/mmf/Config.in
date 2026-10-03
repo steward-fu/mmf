@@ -1,0 +1,5 @@
+config BR2_PACKAGE_MMF
+	bool "ssd202d-sdk"
+	help
+	  Install SSD202D headers and libraries into the Buildroot staging
+	  directory and target filesystem.
