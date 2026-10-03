@@ -3,3 +3,8 @@ kernel/arch/arm/boot/Image.mz
 kernel/arch/arm/boot/Image.xz
 kernel/arch/arm/boot/uImage.mz
 kernel/arch/arm/boot/uImage.xz
+
+buildroot/..config.tmp
+buildroot/.config
+buildroot/dl
+buildroot/output

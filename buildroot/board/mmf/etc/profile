@@ -1,36 +1,4 @@
+export TERM=vt102
 export TERMINFO=/config/terminfo
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/config:/customer/app
 export LD_LIBRARY_PATH=/lib:/config/lib:/config/lib/ap:/customer/lib
-
-mkdir -p /dev/pts
-mount -t sysfs none /sys
-mount -t tmpfs mdev /dev
-mount -t debugfs none /sys/kernel/debug/
-mdev -s
-mkdir -p /var/lock
-#mount -t squashfs /dev/mtdblock5 /config
-#mount -t squashfs /dev/mtdblock6 /customer
-#mount -t jffs2 mtd:appconfigs /appconfigs
-mount -t devpts devpts /dev/pts
-
-ulimit -c unlimited
-#busybox telnetd&
-
-echo 4 > /sys/class/gpio/export
-echo 0 > /sys/class/pwm/pwmchip0/export
-echo 800 > /sys/class/pwm/pwmchip0/pwm0/period
-echo 70 > /sys/class/pwm/pwmchip0/pwm0/duty_cycle
-echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
-
-tinymix set 6 100
-echo 44 > /sys/class/gpio/export 
-echo "low" > /sys/class/gpio/gpio44/direction 
-echo 1 > /sys/class/gpio/gpio44/value 
-
-if [ -e /etc/core.sh ]; then
-    echo "|/etc/core.sh %p" > /proc/sys/kernel/core_pattern
-fi;
-
-if [ -e /customer/demo.sh ]; then
-    /customer/demo.sh
-fi;

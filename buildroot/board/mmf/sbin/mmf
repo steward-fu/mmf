@@ -1,4 +1,27 @@
-#!/bin/bash
+#!/bin/sh
+mkdir -p /dev/pts
+mount -t sysfs none /sys
+mount -t tmpfs mdev /dev
+mount -t debugfs none /sys/kernel/debug/
+mdev -s
+mkdir -p /var/lock
+mount -t devpts devpts /dev/pts
+ulimit -c unlimited
+
+echo 4 > /sys/class/gpio/export
+echo 0 > /sys/class/pwm/pwmchip0/export
+echo 800 > /sys/class/pwm/pwmchip0/pwm0/period
+echo 50 > /sys/class/pwm/pwmchip0/pwm0/duty_cycle
+echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
+
+echo 44 > /sys/class/gpio/export 
+echo "low" > /sys/class/gpio/gpio44/direction 
+echo 1 > /sys/class/gpio/gpio44/value 
+
+if [ -e /etc/core.sh ]; then
+    echo "|/etc/core.sh %p" > /proc/sys/kernel/core_pattern
+fi;
+
 insmod /config/modules/4.9.84/mhal.ko
 insmod /config/modules/4.9.84/mi_common.ko
 
@@ -77,4 +100,6 @@ insmod /config/modules/4.9.84/fbdev.ko
 mdev -s
 
 amixer set "Playback Volume Line Out" 60%
-#/customer/main &
+
+cd /boot
+./main&
