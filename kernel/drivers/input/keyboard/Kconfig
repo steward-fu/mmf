@@ -734,13 +734,13 @@ config KEYBOARD_BCM
 	  To compile this driver as a module, choose M here: the
 	  module will be called bcm-keypad.
 
-config KEYBOARD_MMP
-	tristate "keypad driver for Miyoo Mini Plus"
+config KEYBOARD_MMF
+	tristate "keypad driver for Miyoo Mini Flip"
 	depends on OF
 	help
-	  Say Y here if you want to use keypad driver for Miyoo Mini Plus handheld.
+	  Say Y here if you want to use keypad driver for Miyoo Mini Flip handheld.
 
 	  To compile this driver as a module, choose M here: the
-	  module will be called mmp-keypad.
+	  module will be called mmf-keypad.
 
 endif

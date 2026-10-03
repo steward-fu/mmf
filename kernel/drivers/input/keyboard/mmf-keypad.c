@@ -72,6 +72,27 @@ static uint32_t R_VOLM   = 0x08000;
 static uint32_t R_VOLP   = 0x10000;
 static uint32_t R_POWER  = 0x20000;
 
+/*
+UP     = PA.1
+DOWN   = PC.5
+LEFT   = PC.6
+RIGHT  = PA.5
+A      = PA.7
+B      = PA.6
+X      = PA.9
+Y      = PA.8
+SELECT = PA.11
+START  = PA.10
+L1     = PA.14
+L2     = PA.13
+R1     = PB.15
+R2     = PC.26
+VOLM   = PB.10
+VOLP   = PB.11
+MENU   = PA.12
+POWER  = PC.7
+*/
+
 static uint32_t I_UP     = 1;
 static uint32_t I_DOWN   = 69;
 static uint32_t I_LEFT   = 70;
@@ -93,11 +114,12 @@ static uint32_t I_POWER  = 71;
 
 static int do_input_request(uint32_t pin, const char *name)
 {
-    if(gpio_request(pin, name) < 0) {
+    if (gpio_request(pin, name) < 0) {
         printk("failed to request gpio: %s\n", name);
         return -1;
     }
     gpio_direction_input(pin);
+
     return 0;
 }
 
@@ -149,8 +171,8 @@ static void print_key(uint32_t val, uint8_t is_pressed)
         ""
     };
 
-    for(i = 0; map_val[i] != -1; i++) {
-        if(map_val[i] == val) {
+    for (i = 0; map_val[i] != -1; i++) {
+        if (map_val[i] == val) {
             printk("%s: %s\n", map_key[i], is_pressed ? "Pressed" : "Released");
             break;
         }
@@ -163,9 +185,9 @@ static void report_key(uint32_t btn, uint32_t mask, uint8_t key)
     static uint32_t btn_pressed = 0;
     static uint32_t btn_released = 0xffffffff;
 
-    if(btn & mask) {
+    if (btn & mask) {
         btn_released &= ~mask;
-        if((btn_pressed & mask) == 0) {
+        if ((btn_pressed & mask) == 0) {
             btn_pressed |= mask;
             input_report_key(mydev, key, 1);
             print_key(mask, 1);
@@ -181,31 +203,31 @@ static void report_key(uint32_t btn, uint32_t mask, uint8_t key)
     }
 }
 
-static void mmp_handler(unsigned long unused)
+static void input_handler(unsigned long unused)
 {
     uint32_t val = 0;
     static uint32_t pre = 0;
 
-    if(gpio_get_value(I_UP) == 0)       val |= R_UP;
-    if(gpio_get_value(I_DOWN) == 0)     val |= R_DOWN;
-    if(gpio_get_value(I_LEFT) == 0)     val |= R_LEFT;
-    if(gpio_get_value(I_RIGHT) == 0)    val |= R_RIGHT;
-    if(gpio_get_value(I_A) == 0)        val |= R_A;
-    if(gpio_get_value(I_B) == 0)        val |= R_B;
-    if(gpio_get_value(I_X) == 0)        val |= R_X;
-    if(gpio_get_value(I_Y) == 0)        val |= R_Y;
-    if(gpio_get_value(I_L1) == 0)       val |= R_L1;
-    if(gpio_get_value(I_L2) == 0)       val |= R_L2;
-    if(gpio_get_value(I_R1) == 0)       val |= R_R1;
-    if(gpio_get_value(I_R2) == 0)       val |= R_R2;
-    if(gpio_get_value(I_SELECT) == 0)   val |= R_SELECT;
-    if(gpio_get_value(I_START) == 0)    val |= R_START;
-    if(gpio_get_value(I_MENU) == 0)     val |= R_MENU;
-    if(gpio_get_value(I_VOLM) == 0)     val |= R_VOLM;
-    if(gpio_get_value(I_VOLP) == 0)     val |= R_VOLP;
-    if(gpio_get_value(I_POWER) == 0)    val |= R_POWER;
+    if (gpio_get_value(I_UP) == 0)       val |= R_UP;
+    if (gpio_get_value(I_DOWN) == 0)     val |= R_DOWN;
+    if (gpio_get_value(I_LEFT) == 0)     val |= R_LEFT;
+    if (gpio_get_value(I_RIGHT) == 0)    val |= R_RIGHT;
+    if (gpio_get_value(I_A) == 0)        val |= R_A;
+    if (gpio_get_value(I_B) == 0)        val |= R_B;
+    if (gpio_get_value(I_X) == 0)        val |= R_X;
+    if (gpio_get_value(I_Y) == 0)        val |= R_Y;
+    if (gpio_get_value(I_L1) == 0)       val |= R_L1;
+    if (gpio_get_value(I_L2) == 0)       val |= R_L2;
+    if (gpio_get_value(I_R1) == 0)       val |= R_R1;
+    if (gpio_get_value(I_R2) == 0)       val |= R_R2;
+    if (gpio_get_value(I_SELECT) == 0)   val |= R_SELECT;
+    if (gpio_get_value(I_START) == 0)    val |= R_START;
+    if (gpio_get_value(I_MENU) == 0)     val |= R_MENU;
+    if (gpio_get_value(I_VOLM) == 0)     val |= R_VOLM;
+    if (gpio_get_value(I_VOLP) == 0)     val |= R_VOLP;
+    if (gpio_get_value(I_POWER) == 0)    val |= R_POWER;
 
-    if(pre != val) {
+    if (pre != val) {
         pre = val;
         if (mode == KEYPAD_MODE) {
             report_key(pre, R_UP,     KEY_UP);
@@ -249,16 +271,16 @@ static void mmp_handler(unsigned long unused)
             input_report_rel(mydev, REL_X, 5);
         }
 
-        if((!!(val & R_A)) != mouse_right){
+        if ((!!(val & R_A)) != mouse_right){
             mouse_right = !!(val & R_A);
             need_sync = 1;
         }
-        if((!!(val & R_Y)) != mouse_left){
+        if ((!!(val & R_Y)) != mouse_left){
             mouse_left = !!(val & R_Y);
             need_sync = 1;
         }
 
-        if(need_sync){
+        if (need_sync){
             input_report_key(mydev, BTN_RIGHT, mouse_right);
             input_report_key(mydev, BTN_LEFT, mouse_left);
             input_mt_sync(mydev);
@@ -345,13 +367,14 @@ static int __init kbd_init(void)
     set_bit(REL_Y,          mydev->relbit);
     set_bit(REL_WHEEL,      mydev->relbit);
 
-    mydev->name = "mmp-keypad";
+    mydev->name = "mmf-keypad";
     mydev->id.bustype = BUS_HOST;
     ret = input_register_device(mydev);
     device_create_file(&mydev->dev, &dev_attr_mode);
 
-    setup_timer(&mytimer, mmp_handler, 0);
+    setup_timer(&mytimer, input_handler, 0);
     mod_timer(&mytimer, jiffies + msecs_to_jiffies(myperiod));
+
     return 0;
 }
 
@@ -367,5 +390,5 @@ module_exit(kbd_exit);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Steward Fu <steward.fu@gmail.com>");
-MODULE_DESCRIPTION("keypad driver for miyoo mini plus handheld");
+MODULE_DESCRIPTION("keypad driver for Miyoo Mini Flip handheld");
 
